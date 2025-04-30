@@ -22,16 +22,16 @@ The commit message MUST use the imperative tense.
 Reply with JUST the commit message, without quotes, comments, questions, etc!
 """,
     "refactoring": lambda: """
-Please provide a detailed git commit message that explains the refactoring changes described below.
+Please provide a detailed git commit message that explains the refactoring changes attached.
 Please detail every major change as a separate bullet point.
 Reply with JUST the commit message, without quotes, comments, questions, etc!
 """,
     "documentation": lambda: """
-Please provide a git commit message that explains the documentation changes described below.
+Please provide a git commit message that explains the documentation changes described attached.
 Reply with JUST the commit message, without quotes, comments, questions, etc!
 """,
     "mimic": lambda: f"""
-Please provide a git commit message for the diffs provided below.
+Please provide a git commit message for the diffs attached.
 Your message should closely mimic the style and structure of the following recent git commit messages in this repository:
 
 {get_last_commits()}
@@ -150,10 +150,11 @@ def main():
     else:
         prompt = args.prompt or prompts["default"]()
 
-    user_message = f"""{prompt}
-
-Output of "git diff --staged":
+    user_message = f"""
+Output of "git diff --staged" for the current git repository:
 {git_diff}
+
+{prompt}
 """
 
     messages.append({"role": "user", "content": user_message})
